@@ -1,11 +1,11 @@
-import '../App.css';
 import {useState} from "react";
 import {Link} from "react-router-dom";
 
 function Feed() {
     const [modalImage, setModalImage] = useState<string | null>(null);
 
-    const handleImageClick = (src: string) => {
+    const handleImageClick = (event: React.MouseEvent<HTMLImageElement>) => {
+        const src = event.currentTarget.src;
         setModalImage(src); // Ouvre la modale avec l'image sélectionnée
     };
 
@@ -71,7 +71,7 @@ function Feed() {
               <img src="img/3.jpg" alt="Image 7" className="modal-trigger"/>
             </figure>
           </div>
-         
+
         <div className="column is-one-third">
             <figure className="image is-square">
               <img src="img/2.jpg" alt="Image 8" className="modal-trigger"/>

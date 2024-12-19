@@ -1,4 +1,4 @@
-import '../src/App.css';
+import '../src/index.css';
 import { Routes, Route } from 'react-router-dom';
 import  CreateEvent  from './pages/CreateEvent';
 import HomePage from "./pages/HomePage.tsx";
