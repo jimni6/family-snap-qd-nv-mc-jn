@@ -1,10 +1,16 @@
 import '../src/App.css';
+import { Routes, Route } from 'react-router-dom';
+import  CreateEvent  from './pages/CreateEvent';
+
 
 function App() {
 
   return (
     <>
-    
+        <Routes>
+            <Route path="/create" element={<CreateEvent />} />
+        </Routes>
+      
     <section className="hero is-fullheight is-default is-bold">
         <div className="hero-head">
             <nav className="navbar">
@@ -55,5 +61,3 @@ function App() {
     </>
   )
 }
-
-export default App
