@@ -1,7 +1,10 @@
 import {useState} from "react";
 import {Link} from "react-router-dom";
+import Photos from "../components/Photos.tsx";
 
 function Feed() {
+    const eventId = '3f99a97f-c833-491b-b90f-efab309c349d'; // Replace with the UUID of the event you want
+
     const [modalImage, setModalImage] = useState<string | null>(null);
 
     const handleImageClick = (event: React.MouseEvent<HTMLImageElement>) => {
@@ -15,19 +18,21 @@ function Feed() {
     
     return (
         <>
+
     <section className="section section-feed">
-    
+
     <div className="container">
         <div id="feed-text">
       <h1 className="title-feed">New Year Eve Party</h1>
       <h2>31/12/2024</h2>
       <h3>Join us for a night of fun and celebration as we ring in the new year!</h3>
     </div>
-    <div id="share"> 
+    <div id="share">
         <Link to="/share">
             <button className="button btn-share" id="create">Share</button>
         </Link>
     </div>
+        <Photos eventId={eventId}/>
       <div className="columns is-multiline">
           
         <div className="column is-one-third">
