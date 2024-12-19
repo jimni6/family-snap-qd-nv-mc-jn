@@ -15,7 +15,7 @@ const CreateEvent = () => {
         const { data, error } = await supabase
             .from('events')
             .insert([
-                {  title: title, date: date, description: description, code: "coucou", qrcode: `https://api.qrserver.com/v1/create-qr-code/?data=${title}&size=150x150`,  created_by:'bcd2b9f4-2ffc-4ec8-a141-c14ac6575e72'  },
+                {  title: title, date: date, description: description, qrcode: `https://api.qrserver.com/v1/create-qr-code/?data=${title}&size=150x150`,  created_by:'bcd2b9f4-2ffc-4ec8-a141-c14ac6575e72'  },
             ])
             .select()
 
