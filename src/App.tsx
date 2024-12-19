@@ -4,6 +4,7 @@ import  CreateEvent  from './pages/CreateEvent';
 import HomePage from "./pages/HomePage.tsx";
 import Feed from "./pages/Feed.tsx";
 import Share from "./pages/Share.tsx";
+import Add from "./pages/Add.tsx";
 
 
 
@@ -16,6 +17,7 @@ function App() {
             <Route path="/create" element={<CreateEvent />} />
             <Route path="/feed" element={<Feed />} />
             <Route path="/share" element={<Share />} />
+            <Route path="/add" element={<Add />} />
         </Routes>
     </>
   )
