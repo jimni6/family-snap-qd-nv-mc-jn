@@ -104,7 +104,7 @@ p {
 }
 
 .create {
-    xwidth: 97%!important;
+  
     margin-top: 200px;
 }
 
@@ -222,7 +222,7 @@ svg {
   border-radius: 30px;
   color: #CC825E;
   height: 60px;
-  vertical-align: bottom;
+  
   padding-top: 13px;
   font-family: "Martian Mono", serif;
   font-size: 1.7em;
@@ -236,7 +236,7 @@ svg {
   border-radius: 30px;
   color: #CC825E;
   height: 60px;
-  vertical-align: bottom;
+  
   padding-top: 13px;
   font-family: "Martian Mono", serif;
   font-size: 1.7em;
