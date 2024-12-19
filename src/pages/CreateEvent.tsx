@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { supabase } from '../supabaseClient';
 import {Link, useNavigate} from 'react-router-dom';
 
-const CreateEvent = () => {
+function CreateEvent() {
+    
     
     const [title, setTitle] = useState('');
     const [date, setDate] = useState('')
     const [description, setDescription] = useState('')
-    // const [creator, setCreator] = useState('');
     const navigate = useNavigate();
     
     const createEvent = async () => {
@@ -63,9 +63,9 @@ const CreateEvent = () => {
                                         <input className="input form" type="text" placeholder="Title" onChange={(e)=> setTitle(e.target.value)}/>
                                         <input className="input form" type="date" placeholder="Date" onChange={(e) => setDate(e.target.value)}/>
                                         <input className="input form" type="text" placeholder="Description" onChange={(e) => setDescription(e.target.value)}/>
-                                        {/*<Link to="/feed">*/}
+                                        <Link to="/feed">
                                             <button className="button" id="create" onClick={createEvent}>Create an Event</button>
-                                        {/*</Link>*/}
+                                        </Link>
 
                                     </p>
                                 </div>
