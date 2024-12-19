@@ -66,3 +66,263 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+
+/*------------------------------------*/
+  
+@import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+
+
+section {
+    background-color: black;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url("src/assets/img/bglp.png");
+    background-size: cover;
+}
+
+p {
+    font-size: 1em;
+    font-family: "Martian Mono", serif;
+    text-align: left;
+    color: white;
+}
+
+
+
+.white {
+    color: white;
+}
+
+#glasslp {
+    background-color: rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.6);
+}
+
+#create {
+    background-color: #274E81;
+    color: white;
+    font-size: 20px;
+}
+#create:hover {
+    background-color: #CC825E;
+    color: white;
+}
+
+
+#join {
+    background-color: white;
+    color: #CC825E;
+    font-size: 20px;
+    transition: all 0.3s;
+}
+
+
+.button {
+    width: 100%;
+    height: 60px;
+    margin: 30px auto;
+    margin-bottom: 0;
+    font-family: "Martian Mono", serif;
+    border-radius: 15px;
+}
+
+
+.input {
+    background-color: white;
+    color: #CC825E!important;
+    font-size: 20px;
+    font-family: "Martian Mono", serif;
+    height: 60px;
+    border-radius: 15px;
+
+    
+}
+
+.or {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.input::placeholder{
+    color: #CC825E;
+    text-align: center;
+    opacity: 0.7;
+    font-family: "Martian Mono", serif;
+}
+
+
+#glasscreate {
+    background-color: rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.6);
+    margin-top: -100px;
+    
+}
+
+.title {
+    font-family: "Fjalla One", serif;
+    color: white;
+    font-size: 2em;
+}
+
+.create {
+    xwidth: 97%!important;
+    margin-top: 200px;
+}
+
+
+.form::placeholder{
+    color: #CC825E;
+    text-align: left;
+    opacity: 0.7;
+    font-family: "Martian Mono", serif;
+}
+
+.form {
+    margin-top: 10px;
+}
+
+
+
+figure img {
+  border-radius: 15px;
+}
+
+.title-feed {
+  font-size: 6em;
+  font-family: "Fjalla One", serif;
+  color: white;
+  margin-bottom: -30px;
+}
+
+h2 {
+  font-family: "martian mono", serif;
+  color: white;
+  font-size: 2em;
+
+}
+
+h3 {
+  font-family: "martian mono", serif;
+  color: white;
+  font-size: 1.3em;
+  font-weight: 100;
+}
+
+.section-feed {
+background-color: black;
+}
+
+
+
+#share {
+  width: 100%;
+  text-align: right;
+}
+
+.btn-share {
+  width: 200px;
+  margin-right: 0;
+  display: inline-block;
+  margin-bottom: 30px;
+  
+}
+
+footer {
+  display: block;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+#block-add {
+  display: block;
+  background-color: #274E81;
+  -webkit-border-top-left-radius: 40px;
+-moz-border-radius-topleft: 40px;
+border-top-left-radius: 40px;
+  color: white;
+  height: 100px;
+  width: 100px;
+  position: relative;
+
+}
+
+svg {
+  color: white;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 30%;
+  left: 30%;
+
+}
+
+.contshare  {
+  position: relative;
+  display: block;
+}
+
+
+#glassshare {
+  background-color: rgba(0,0,0,0.4);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 30px;
+  border: 1px solid rgba(255,255,255,0.6);
+  margin-top: -100px;
+ 
+  
+}
+
+
+
+#code {
+  display: block;
+  background-color: white;
+  width: 100%;
+  border-radius: 30px;
+  color: #CC825E;
+  height: 60px;
+  vertical-align: bottom;
+  padding-top: 13px;
+  font-family: "Martian Mono", serif;
+  font-size: 1.7em;
+  font-weight: 800;
+}
+
+#qrcode {
+  display: block;
+  background-color: white;
+  width: 100%;
+  border-radius: 30px;
+  color: #CC825E;
+  height: 60px;
+  vertical-align: bottom;
+  padding-top: 13px;
+  font-family: "Martian Mono", serif;
+  font-size: 1.7em;
+  font-weight: 800;
+  height: fit-content;
+}
+
+#qrcode img {
+  width: 300px;
+  margin: 0 auto;
+}
+
+#close {
+  position: absolute;
+  top: -200px;
+  right:40px;
+}
+
+
