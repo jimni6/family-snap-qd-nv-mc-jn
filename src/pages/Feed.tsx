@@ -33,10 +33,13 @@ function Feed() {
         </Link>
     </footer>
             
+
     <div className="modal" id="imageModal">
-        <span className="modal-close" id="modalClose">&times;</span>
-        <img className="modal-content" id="modalImage" src="" alt=""/>
+    <span className="modal-close" id="modalClose">&times;</span>
+    <img className="modal-content" id="modalImage" src="" alt=""/>
     </div>
+        
+
     {/*<script>*/}
     {/*    document.querySelectorAll('.modal-trigger').forEach(item => {*/}
     {/*        item.addEventListener('click', event => {*/}
@@ -57,7 +60,6 @@ function Feed() {
     {/*            modal.style.display = 'none'*/}
     {/*        }*/}
     {/*    });*/}
-    {/*</script>*/}
         
         </>
 )
