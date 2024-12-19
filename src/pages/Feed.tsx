@@ -96,10 +96,10 @@ function Feed() {
         </Link>
     </footer>
             
-    <div className="modal" id="imageModal">
-        <span className="modal-close" id="modalClose">&times;</span>
-        <img className="modal-content" id="modalImage" src="" alt=""/>
-    </div>
+    {/*<div className="modal" id="imageModal">*/}
+    {/*    <span className="modal-close" id="modalClose">&times;</span>*/}
+    {/*    <img className="modal-content" id="modalImage" src="" alt=""/>*/}
+    {/*</div>*/}
 
             {modalImage && (
                 <div
