@@ -3,57 +3,42 @@ import { supabase } from '../supabaseClient';
 import {Link, useNavigate} from 'react-router-dom';
 
 const CreateEvent = () => {
+    
     const [title, setTitle] = useState('');
-    const [creator, setCreator] = useState('');
+    const [date, setDate] = useState('')
+    const [description, setDescription] = useState('')
+    // const [creator, setCreator] = useState('');
     const navigate = useNavigate();
-
+    
     const createEvent = async () => {
 
         const { data, error } = await supabase
             .from('events')
             .insert([
-                {  title: 'someValueTitle', created_by: 'bcd2b9f4-2ffc-4ec8-a141-c14ac6575e72'  },
+                {  title: title, date: date, description: description, qrcode: `https://api.qrserver.com/v1/create-qr-code/?data=${title}&size=150x150`,  created_by:'bcd2b9f4-2ffc-4ec8-a141-c14ac6575e72'  },
             ])
             .select()
 
         if (error) {
             alert('Insert failed');
-            console.log(data, error);
+            console.log(error.message);
         } else {
-            console.log('Logged in:' );
-            navigate('/' );
+            console.log(data);
+                navigate('/feed')
+            }
         }
-    };
-
 
     return (
         <div>
-            {/*<h1>event</h1>*/}
-            {/*<input*/}
-            {/*    type="email"*/}
-            {/*    placeholder="title"*/}
-            {/*    value={title}*/}
-            {/*    onChange={(e) => setTitle(e.target.value)}*/}
-            {/*/>*/}
-            {/*<input*/}
-            {/*    type="password"*/}
-            {/*    placeholder="creator"*/}
-            {/*    value={creator}*/}
-            {/*    onChange={(e) => setCreator(e.target.value)}*/}
-            {/*/>*/}
-            {/*<button onClick={createEvent}>Login</button>*/}
-            {/*<p>*/}
-            {/*    Don't have an account? <a href="/ ">Register</a>*/}
-            {/*</p>*/}
 
             <section className="hero is-fullheight is-default is-bold">
                 <div className="hero-head">
                     <nav className="navbar">
                         <div className="container">
                             <div className="navbar-brand">
-                                <a className="navbar-item" href="index.html">
+                                <Link to="/" className="navbar-item" >
                                     <img src="./src/assets/img/lgo.svg" alt="Logo"/>
-                                </a>
+                                </Link>
 
                             </div>
                             <div id="navbarMenu" className="navbar-menu">
@@ -75,12 +60,12 @@ const CreateEvent = () => {
                             <div className="">
                                 <div className="field is-grouped">
                                     <p className="control is-expanded">
-                                        <input className="input form" type="text" placeholder="Title"/>
-                                        <input className="input form" type="text" placeholder="Date"/>
-                                        <input className="input form" type="text" placeholder="Description"/>
-                                        <Link to="/feed">
-                                            <button className="button" id="create">Create an Event</button>
-                                        </Link>
+                                        <input className="input form" type="text" placeholder="Title" onChange={(e)=> setTitle(e.target.value)}/>
+                                        <input className="input form" type="date" placeholder="Date" onChange={(e) => setDate(e.target.value)}/>
+                                        <input className="input form" type="text" placeholder="Description" onChange={(e) => setDescription(e.target.value)}/>
+                                        {/*<Link to="/feed">*/}
+                                            <button className="button" id="create" onClick={createEvent}>Create an Event</button>
+                                        {/*</Link>*/}
 
                                     </p>
                                 </div>

@@ -5,6 +5,8 @@ import HomePage from "./pages/HomePage.tsx";
 import Feed from "./pages/Feed.tsx";
 import Share from "./pages/Share.tsx";
 import PhotoUploader from './pages/PhotosUploader.tsx';
+import Add from "./pages/Add.tsx";
+
 
 
 
@@ -18,6 +20,7 @@ function App() {
             <Route path="/feed" element={<Feed />} />
             <Route path="/share" element={<Share />} />
             <Route path="/photo" element={<PhotoUploader />} />
+            <Route path="/add" element={<Add />} />
         </Routes>
     </>
   )
