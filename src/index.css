@@ -256,3 +256,14 @@ svg {
 }
 
 
+label {
+  display: block;
+  margin-bottom: 30px;
+}
+
+#file-upload {
+  display: block;
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
