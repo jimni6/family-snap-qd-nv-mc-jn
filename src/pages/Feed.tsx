@@ -1,20 +1,8 @@
-import {useState} from "react";
 import {Link} from "react-router-dom";
 import Photos from "../components/Photos.tsx";
 
 function Feed() {
     const eventId = '3f99a97f-c833-491b-b90f-efab309c349d'; // Replace with the UUID of the event you want
-
-    const [modalImage, setModalImage] = useState<string | null>(null);
-
-    const handleImageClick = (event: React.MouseEvent<HTMLImageElement>) => {
-        const src = event.currentTarget.src;
-        setModalImage(src); // Ouvre la modale avec l'image sélectionnée
-    };
-
-    const closeModal = () => {
-        setModalImage(null); // Ferme la modale
-    };
     
     return (
         <>
@@ -33,62 +21,6 @@ function Feed() {
         </Link>
     </div>
         <Photos eventId={eventId}/>
-      <div className="columns is-multiline">
-          
-        <div className="column is-one-third">
-          <figure className="image is-square">
-            <img src="img/9.jpg" alt="Image 1" className="modal-trigger" onClick={handleImageClick}/>
-          </figure>
-        </div>
-        
-        <div className="column is-one-third">
-          <figure className="image is-square">
-            <img src="img/8.jpg" alt="Image 2" className="modal-trigger"/>
-          </figure>
-        </div>
-        
-        <div className="column is-one-third">
-          <figure className="image is-square">
-            <img src="img/7.jpg" alt="Image 3" className="modal-trigger"/>
-          </figure>
-        </div>
-        
-        <div className="column is-one-third">
-          <figure className="image is-square">
-            <img src="img/4.jpg" alt="Image 4" className="modal-trigger"/>
-          </figure>
-        </div>
-        
-        <div className="column is-one-third">
-          <figure className="image is-square">
-            <img src="img/5.jpg" alt="Image 5" className="modal-trigger"/>
-          </figure>
-        </div>
-        
-        <div className="column is-one-third">
-          <figure className="image is-square">
-            <img src="img/6.jpg" alt="Image 6" className="modal-trigger"/>
-          </figure>
-        </div>
-        
-        <div className="column is-one-third">
-            <figure className="image is-square">
-              <img src="img/3.jpg" alt="Image 7" className="modal-trigger"/>
-            </figure>
-          </div>
-
-        <div className="column is-one-third">
-            <figure className="image is-square">
-              <img src="img/2.jpg" alt="Image 8" className="modal-trigger"/>
-            </figure>
-          </div>
-          
-        <div className="column is-one-third">
-            <figure className="image is-square">
-              <img src="img/1.jpg" alt="Image 9" className="modal-trigger"/>
-            </figure>
-          </div>
-      </div>
     </div>
     </section>
     <footer>
@@ -105,22 +37,6 @@ function Feed() {
         <span className="modal-close" id="modalClose">&times;</span>
         <img className="modal-content" id="modalImage" src="" alt=""/>
     </div>
-
-            {modalImage && (
-                <div
-                    className="modal"
-                    id="imageModal"
-                    style={{ display: "block" }}
-                    onClick={(e) => {
-                        if (e.target === e.currentTarget) closeModal();
-                    }}
-                >
-          <span className="modal-close" id="modalClose" onClick={closeModal}>
-            &times;
-          </span>
-                    <img className="modal-content" id="modalImage" src={modalImage} alt="" />
-                </div>
-            )}
     {/*<script>*/}
     {/*    document.querySelectorAll('.modal-trigger').forEach(item => {*/}
     {/*        item.addEventListener('click', event => {*/}
