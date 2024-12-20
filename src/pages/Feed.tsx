@@ -1,9 +1,39 @@
 import {Link, useParams} from "react-router-dom";
 import Photos from "../components/Photos.tsx";
+import {useEffect, useState} from "react";
+import {supabase} from "../supabaseClient.ts";
 
 function Feed() {
-    const { id } =useParams()// Replace with the UUID of the event you want
 
+    const { id } = useParams()
+    // const eventId = Object.values(id)
+    
+    const [title, setTitle] = useState('')
+    const [date, setDate] = useState('')
+    const [description, setDescription] = useState('')
+    
+
+    useEffect(() => {
+        
+        const fetchEventInfo = async () => {
+            const { data, error } = await supabase
+                .from('events')
+                .select('title,date, description')
+                .eq('id', id)
+
+            if(data){
+                
+                setTitle(data[0].title)
+                setDate(data[0].date)
+                setDescription(data[0].description)
+                
+            } else (console.log(error?.message))
+        }
+
+        fetchEventInfo()
+        
+    }, [id]);
+    
     return (
         <>
 
@@ -11,12 +41,12 @@ function Feed() {
 
     <div className="container">
         <div id="feed-text">
-      <h1 className="title-feed">New Year Eve Party</h1>
-      <h2>31/12/2024</h2>
-      <h3>Join us for a night of fun and celebration as we ring in the new year!</h3>
+      <h1 className="title-feed">{title}</h1>
+      <h2>{date}</h2>
+      <h3>{description}</h3>
     </div>
     <div id="share">
-        <Link to="/share">
+        <Link to={`/feed/${id}/share`}>
             <button className="button btn-share" id="create">Share</button>
         </Link>
     </div>
@@ -24,7 +54,7 @@ function Feed() {
     </div>
     </section>
     <footer>
-        <Link to="/add">
+        <Link to={`/feed/${id}/add`}>
             <div id="block-add">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                     <path fill="white" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z"/>

@@ -10,6 +10,7 @@ import Add from "./pages/Add.tsx";
 
 function App() {
 
+
   return (
     <>
         <AddToHomeScreen />
@@ -17,7 +18,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/create" element={<CreateEvent />} />
             <Route path="/feed/:id" element={<Feed />} />
-            <Route path="/share" element={<Share />} />
+            <Route path="/feed/:id/share" element={<Share />} />
             <Route path="/feed/:id/add" element={<Add />} />
         </Routes>
     </>
