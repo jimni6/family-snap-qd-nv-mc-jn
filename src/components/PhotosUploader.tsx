@@ -113,8 +113,7 @@ const UploadPhoto: React.FC<UploadPhotoProps> = ({eventId}) => {
     return (
         <div>
             <div>
-
-                <button className="button" onClick={() => setUsingWebcam(false)}>Download a file</button>
+                {/*<button className="button" onClick={() => setUsingWebcam(false)}>Download a file</button>*/}
                 <button className="button" onClick={() => setUsingWebcam(true)}>Take a photo</button>
 
             </div>

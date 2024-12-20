@@ -7,7 +7,6 @@ import logo from '../assets/img/lgo.svg';
 import familysvg from '../assets/img/FamilySnap.svg';
 
 function HomePage() {
-    
     const navigate = useNavigate()
 
   const createEvent = async (value: number | string) => {
