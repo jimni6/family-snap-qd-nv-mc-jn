@@ -28,7 +28,7 @@ function CreateEvent() {
             // Use React Router's navigate function
             navigate(`/feed/${id}`);
         }
-        }
+    }
 
     return (
         <div>
