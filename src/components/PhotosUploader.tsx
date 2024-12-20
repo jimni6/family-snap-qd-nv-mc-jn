@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
+import Webcam from "react-webcam";
 import {supabase} from '../supabaseClient.ts';
 
 type UploadPhotoProps = {
@@ -11,32 +12,52 @@ const UploadPhoto: React.FC<UploadPhotoProps> = ({eventId}) => {
 
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [uploadStatus, setUploadStatus] = useState<string | null>(null);
+    const [usingWebcam, setUsingWebcam] = useState(false);
+    const [capturedImage, setCapturedImage] = useState<string | null>(null);
+
+    const webcamRef = useRef<Webcam>(null);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             setSelectedFile(e.target.files[0]);
+            setCapturedImage(null);
+        }
+    };
 
-            console.log("Fichier sélectionné:", File);
+    const capturePhoto = () => {
+        if (webcamRef.current) {
+            const imageSrc = webcamRef.current.getScreenshot();
+            setCapturedImage(imageSrc || null);
+            setSelectedFile(null); // Reset selected file if switching to webcam capture
         }
     };
 
     const uploadPhoto = async () => {
-        if (!selectedFile) {
-            setUploadStatus("Veuillez sélectionner un fichier.");
+        if (!selectedFile && !capturedImage) {
+            setUploadStatus("Veuillez sélectionner un fichier ou capturer une photo.");
             return;
         }
 
         try {
-            // Étape 1 : Upload vers Supabase Storage
-            const fileName = selectedFile.name;
-            console.log(fileName);
 
+            let fileName: string;
+            let fileData: Blob;
+
+            if (capturedImage) {
+                fileName = `webcam-${Date.now()}.png`;
+                fileData = await fetch(capturedImage).then((res) => res.blob());
+            } else if (selectedFile) {
+                fileName = selectedFile.name;
+                fileData = selectedFile;
+            } else {
+                return;
+            }
+            // Étape 1 : Upload vers Supabase Storage
             const {error: uploadError} = await supabase.storage
                 .from("photos") // Nom du bucket de stockage dans Supabase
-                .upload(fileName, selectedFile);
+                .upload(fileName, fileData);
 
             if (uploadError) {
-                console.log(uploadError)
                 throw uploadError;
             }
 
@@ -50,7 +71,7 @@ const UploadPhoto: React.FC<UploadPhotoProps> = ({eventId}) => {
                 .from("photos") // Nom de la table de photos dans Supabase
                 .insert([
                     {
-                        url: photoUrl, // Insertion de l'URL de la photo
+                        url: photoUrl, 
                         created_at: new Date().toISOString(),
                         event_id: eventId
                     },
@@ -59,7 +80,6 @@ const UploadPhoto: React.FC<UploadPhotoProps> = ({eventId}) => {
 
             if (error) {
                 alert('Insert failed');
-                console.log(data, error);
             } else {
                 setUploadStatus("Photo téléchargée et enregistrée avec succès !");
                 console.log('Upload réussi:', data);
@@ -71,8 +91,32 @@ const UploadPhoto: React.FC<UploadPhotoProps> = ({eventId}) => {
 
     return (
         <div>
-            <input type="file" accept="image/*" onChange={handleFileChange}/>
-            <button className="button" id="create" onClick={uploadPhoto} disabled={!selectedFile}>
+            <div>
+                <button onClick={() => setUsingWebcam(false)}>Télécharger un fichier</button>
+                <button onClick={() => setUsingWebcam(true)}>Prendre une photo</button>
+            </div>
+
+            {usingWebcam ? (
+                <div>
+                    <Webcam
+                        audio={false}
+                        ref={webcamRef}
+                        screenshotFormat="image/png"
+                    />
+                    <button onClick={capturePhoto}>Capturer</button>
+                </div>
+            ) : (
+                <input type="file" accept="image/*" onChange={handleFileChange} />
+            )}
+
+            {capturedImage && (
+                <div>
+                    <p>Photo capturée :</p>
+                    <img src={capturedImage} alt="Captured" style={{ width: "100%" }} />
+                </div>
+            )}
+
+            <button className="button" id="create" onClick={uploadPhoto} disabled={!selectedFile && !capturedImage}>
                 Upload
             </button>
             {uploadStatus && <p>{uploadStatus}</p>}
