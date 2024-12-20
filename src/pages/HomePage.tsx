@@ -1,6 +1,25 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {supabase} from "../supabaseClient.ts";
 
 function HomePage() {
+    
+    const navigate = useNavigate()
+
+  const createEvent = async (value: number) => {
+      const { data, error } = await supabase
+          .from('events')
+          .select('id')
+          .eq('code_unique', value)
+      
+      if(data) {
+          const event = data[0].id
+          navigate(`feed/${event}`)
+         
+      } else {
+          console.log(error?.message)
+      }
+  }
+  
     return (
         <>
             <section className="hero is-fullheight is-default is-bold">
@@ -46,7 +65,8 @@ function HomePage() {
                                         <button className="button" id="create">Create an Event</button>
                                     </Link>
                                     <p className="has-text-centered or">or</p>
-                                    <input className="input" type="text" placeholder="Paste Your Code"/>
+                                    <input className="input" placeholder="Paste Your Code" 
+                                           onChange={(e) => createEvent(e.target.value)}/>
                                 </p>
                             </div>
                         </div>
