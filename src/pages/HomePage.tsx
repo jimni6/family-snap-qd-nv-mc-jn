@@ -10,7 +10,7 @@ function HomePage() {
     
     const navigate = useNavigate()
 
-  const createEvent = async (value: number) => {
+  const createEvent = async (value: number | string) => {
       const { data, error } = await supabase
           .from('events')
           .select('id')
