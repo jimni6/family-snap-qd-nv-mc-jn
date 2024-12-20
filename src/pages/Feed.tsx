@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {supabase} from "../supabaseClient.ts";
 
 function Feed() {
+
     const id = useParams()
     const eventId = Object.values(id)
     
@@ -11,7 +12,6 @@ function Feed() {
     const [date, setDate] = useState('')
     const [description, setDescription] = useState('')
     
-    // console.log(eventId[0])
 
     useEffect(() => {
         

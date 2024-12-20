@@ -3,12 +3,12 @@ import {supabase} from "../supabaseClient.ts";
 
 // Define the structure of a Photo object
 type Photo = {
-    id: string; // UUID
+    id: string ; // UUID
     url: string;
 };
 
 type PhotosProps = {
-    eventId: string; // UUID of the event to filter photos
+    eventId: string | undefined; // UUID of the event to filter photos
 };
 
 const Photos: React.FC<PhotosProps> = ({ eventId }) => {
