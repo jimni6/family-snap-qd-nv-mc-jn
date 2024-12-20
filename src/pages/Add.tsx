@@ -1,7 +1,9 @@
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
+import UploadPhoto from "../components/PhotosUploader.tsx";
 
 function Add() {
-
+    const { id } = useParams();
+    console.log(id);
     return (
         <>
         
@@ -42,14 +44,13 @@ function Add() {
                         <div className="field is-grouped">
                             <p className="control is-expanded">
                                 
-                            <form action="/upload" method="post" encType="multipart/form-data">
-    <label htmlFor="file-upload" >
-      Choose a file
-    </label>
-    <input id="file-upload" type="file" name="fichier"/>
-    <button type="submit" className="button" id="create">Upload</button>
+                            <div>
+                                <div>
+                                  Choose a file
+                                </div>
+                                <UploadPhoto eventId = {id}/>
 
-  </form></p>
+                            </div></p>
                         
                         </div>
                     </div>

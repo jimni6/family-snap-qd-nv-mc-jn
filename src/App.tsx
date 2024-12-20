@@ -5,7 +5,6 @@ import HomePage from "./pages/HomePage.tsx";
 import Feed from "./pages/Feed.tsx";
 import Share from "./pages/Share.tsx";
 import AddToHomeScreen from "./components/BeforeInstallPrompt.tsx";
-import PhotoUploader from './pages/PhotosUploader.tsx';
 import Add from "./pages/Add.tsx";
 
 
@@ -17,10 +16,9 @@ function App() {
         <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/create" element={<CreateEvent />} />
-            <Route path="/feed" element={<Feed />} />
+            <Route path="/feed/:id" element={<Feed />} />
             <Route path="/share" element={<Share />} />
-            <Route path="/photo" element={<PhotoUploader />} />
-            <Route path="/add" element={<Add />} />
+            <Route path="/feed/:id/add" element={<Add />} />
         </Routes>
     </>
   )

@@ -1,9 +1,9 @@
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import Photos from "../components/Photos.tsx";
 
 function Feed() {
-    const eventId = '3f99a97f-c833-491b-b90f-efab309c349d'; // Replace with the UUID of the event you want
-    
+    const { id } =useParams()// Replace with the UUID of the event you want
+
     return (
         <>
 
@@ -20,7 +20,7 @@ function Feed() {
             <button className="button btn-share" id="create">Share</button>
         </Link>
     </div>
-        <Photos eventId={eventId}/>
+        <Photos eventId={id}/>
     </div>
     </section>
     <footer>
