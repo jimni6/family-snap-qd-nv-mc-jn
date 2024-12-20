@@ -1,7 +1,7 @@
 import React, {useState, useRef} from "react";
 import Webcam from "react-webcam";
 import {supabase} from '../supabaseClient.ts';
-import {Link, useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 
 type UploadPhotoProps = {
