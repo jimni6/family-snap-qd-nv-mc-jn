@@ -102,7 +102,7 @@ const UploadPhoto: React.FC<UploadPhotoProps> = ({eventId}) => {
             if (error) {
                 alert('Insert failed');
             } else {
-                setUploadStatus("Photo téléchargée et enregistrée avec succès !");
+                setUploadStatus("Photo uploaded and saved successfully!");
                 console.log('Upload réussi:', data);
             }
         } catch (error: any) {
@@ -113,7 +113,10 @@ const UploadPhoto: React.FC<UploadPhotoProps> = ({eventId}) => {
     return (
         <div>
             <div>
-                <button className="button" onClick={() => setUsingWebcam(true)}>Prendre une photo</button>
+
+                <button className="button" onClick={() => setUsingWebcam(false)}>Download a file</button>
+                <button className="button" onClick={() => setUsingWebcam(true)}>Take a photo</button>
+
             </div>
 
             {usingWebcam ? (
@@ -123,7 +126,7 @@ const UploadPhoto: React.FC<UploadPhotoProps> = ({eventId}) => {
                         ref={webcamRef}
                         screenshotFormat="image/png"
                     />
-                    <button className="button" onClick={capturePhoto}>Capturer</button>
+                    <button className="button" onClick={capturePhoto}>Capture</button>
                 </div>
             ) : (
                 <button className="button" onClick={() => setUsingWebcam(false)}>  <input type="file" accept="image/*" onChange={handleFileChange} /></button>
@@ -132,7 +135,7 @@ const UploadPhoto: React.FC<UploadPhotoProps> = ({eventId}) => {
 
             {capturedImage && (
                 <div>
-                    <p>Photo capturée :</p>
+                    <p>Photo captured :</p>
                     <img src={capturedImage} alt="Captured" style={{ width: "100%" }} />
                 </div>
             )}
