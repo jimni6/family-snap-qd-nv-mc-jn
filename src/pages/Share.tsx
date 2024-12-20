@@ -1,20 +1,20 @@
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {supabase} from "../supabaseClient.ts";
 
 // @ts-ignore
 function Share() {
 
-    const idEvent = useParams()
-    const id = Object.values(idEvent)
+    const id = useParams()
+    const idEvent = Object.values(id)
     const [qrCode, setQrCode] = useState('')
     const [codeId, setCodeId] = useState('')
     
     useEffect(() => {
         const fetchQrCOde = () => {
-            const linkToEvent = `http://localhost:3000/feed/${id}`
-            const qrCode = `https://api.qrserver.com/v1/create-qr-code/?data=${linkToEvent}&size=150x150` 
-            console.log(qrCode)
+            
+            const linkToEvent = `https://family-snap-qd-nv-mc-jn.vercel.app/feed/${idEvent}`
+            const qrCode = `https://api.qrserver.com/v1/create-qr-code/?data=${linkToEvent}&size=150x150`
             setQrCode(qrCode)
         }
 
@@ -22,11 +22,12 @@ function Share() {
             const {data, error} = await supabase
                 .from('events')
                 .select('code_unique')
-                .eq('id', id);
+                .eq('id', idEvent);
 
             if(data) {
                 // @ts-ignore
                 setCodeId(data[0].code_unique)
+                
             } else (
                 console.log(error?.message)
             )
@@ -34,7 +35,7 @@ function Share() {
         fetchQrCOde()
         fetchCodeUnique()
         
-    }, [id]);
+    }, [idEvent]);
     
     return (
         <>

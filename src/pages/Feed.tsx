@@ -1,8 +1,38 @@
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import Photos from "../components/Photos.tsx";
+import {useEffect, useState} from "react";
+import {supabase} from "../supabaseClient.ts";
 
 function Feed() {
-    const eventId = '3f99a97f-c833-491b-b90f-efab309c349d'; // Replace with the UUID of the event you want
+    const id = useParams()
+    const eventId = Object.values(id)
+    
+    const [title, setTitle] = useState('')
+    const [date, setDate] = useState('')
+    const [description, setDescription] = useState('')
+    
+    // console.log(eventId[0])
+
+    useEffect(() => {
+        
+        const fetchEventInfo = async () => {
+            const { data, error } = await supabase
+                .from('events')
+                .select('title,date, description')
+                .eq('id', eventId)
+
+            if(data){
+                
+                setTitle(data[0].title)
+                setDate(data[0].date)
+                setDescription(data[0].date)
+                
+            } else (console.log(error?.message))
+        }
+
+        fetchEventInfo()
+        
+    }, [eventId]);
     
     return (
         <>
@@ -11,12 +41,12 @@ function Feed() {
 
     <div className="container">
         <div id="feed-text">
-      <h1 className="title-feed">New Year Eve Party</h1>
-      <h2>31/12/2024</h2>
-      <h3>Join us for a night of fun and celebration as we ring in the new year!</h3>
+      <h1 className="title-feed">{title}</h1>
+      <h2>{date}</h2>
+      <h3>{description}</h3>
     </div>
     <div id="share">
-        <Link to="/share">
+        <Link to={`/feed/${eventId}/share`}>
             <button className="button btn-share" id="create">Share</button>
         </Link>
     </div>
