@@ -9,7 +9,7 @@ section {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url("src/assets/img/bglp.png");
+    background-image: url("/assets/img/bglp.png");
     background-size: cover;
 }
 

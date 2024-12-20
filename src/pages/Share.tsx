@@ -1,6 +1,7 @@
 import {Link, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {supabase} from "../supabaseClient.ts";
+import logo from '../assets/img/lgo.svg';
 
 function Share() {
 
@@ -43,7 +44,7 @@ function Share() {
                 <div className="container">
                     <div className="navbar-brand">
                         <Link to="/" className="navbar-item" >
-                            <img src="./src/assets/img/lgo.svg" alt="Logo"/>
+                            <img src={logo} alt="Logo"/>
                         </Link>
                         
                     </div>
