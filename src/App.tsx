@@ -10,14 +10,14 @@ import Add from "./pages/Add.tsx";
 
 function App() {
 
-    const id = '0958f13d-62fd-47e0-9b76-fcbf60af466b'
+
   return (
     <>
         <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/create" element={<CreateEvent />} />
-            <Route path="/feed" element={<Feed />} />
-            <Route path="/share" element={<Share id={id}/>} />
+            <Route path="/feed/:id" element={<Feed />} />
+            <Route path="/feed/:id/share" element={<Share />} />
             <Route path="/add" element={<Add />} />
         </Routes>
     </>

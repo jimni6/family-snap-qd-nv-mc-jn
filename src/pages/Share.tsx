@@ -1,34 +1,41 @@
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {supabase} from "../supabaseClient.ts";
 
 // @ts-ignore
-function Share({id}) {
+function Share() {
 
-    console.log(id)
+    const idEvent = useParams()
+    const id = Object.values(idEvent)
     const [qrCode, setQrCode] = useState('')
     const [codeId, setCodeId] = useState('')
     
     useEffect(() => {
-       
-        const fetchData = async() => {
+        const fetchQrCOde = () => {
+            const linkToEvent = `http://localhost:3000/feed/${id}`
+            const qrCode = `https://api.qrserver.com/v1/create-qr-code/?data=${linkToEvent}&size=150x150` 
+            console.log(qrCode)
+            setQrCode(qrCode)
+        }
+
+        const fetchCodeUnique  = async() => {
             const {data, error} = await supabase
                 .from('events')
-                .select('code_unique, qrcode')
+                .select('code_unique')
                 .eq('id', id);
 
             if(data) {
                 // @ts-ignore
                 setCodeId(data[0].code_unique)
-                setQrCode(data[0].qrcode)
             } else (
                 console.log(error?.message)
             )
         }
+        fetchQrCOde()
+        fetchCodeUnique()
         
-        fetchData()
     }, [id]);
-
+    
     return (
         <>
         
