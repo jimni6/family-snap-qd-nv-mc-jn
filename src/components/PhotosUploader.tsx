@@ -19,6 +19,24 @@ const UploadPhoto: React.FC<UploadPhotoProps> = ({eventId}) => {
 
     const webcamRef = useRef<Webcam>(null);
 
+    const getUserId = async () => {
+        const { data, error } = await supabase.auth.getUser();
+
+        if (error) {
+            console.error('Error fetching user:', error.message);
+            return;
+        }
+
+        if (data?.user) {
+            const userId = data.user.id; // Get the user's unique ID
+            console.log('Authenticated User ID:', userId);
+            return userId;
+        } else {
+            console.log('No user is authenticated.');
+            return null;
+        }
+    };
+
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             setSelectedFile(e.target.files[0]);
@@ -75,7 +93,8 @@ const UploadPhoto: React.FC<UploadPhotoProps> = ({eventId}) => {
                     {
                         url: photoUrl, 
                         created_at: new Date().toISOString(),
-                        event_id: eventId
+                        event_id: eventId,
+                        uploaded_by: await getUserId()
                     },
                 ])
                 .select();

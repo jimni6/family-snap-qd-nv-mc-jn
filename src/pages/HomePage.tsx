@@ -1,4 +1,6 @@
 import {Link} from "react-router-dom";
+import LoginPage from "../components/LoginPage.tsx";
+import SignOutButton from "../components/SignOutButton.tsx";
 import logo from '../assets/img/lgo.svg';
 import familysvg from '../assets/img/FamilySnap.svg';
 
@@ -38,7 +40,8 @@ function HomePage() {
                                 </figure>
                             </div>
                             <div className="column is-6 is-offset-1" id="glasslp">
-
+                                <LoginPage />
+                                <SignOutButton />
                                 <p className="white">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec mauris
                                     turpis. Praesent id sapien semper, posuere eros in, faucibus urna. Vestibulum
