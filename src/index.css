@@ -3,7 +3,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
 
-
+body {
+  background-color: black!important;
+}
 section {
     background-color: black;
     font-family: Arial, sans-serif;
@@ -11,6 +13,8 @@ section {
     padding: 0;
     background-image: url("src/assets/img/bglp.png");
     background-size: cover;
+    height: auto;
+    min-height: 100vh;
 }
 
 p {
