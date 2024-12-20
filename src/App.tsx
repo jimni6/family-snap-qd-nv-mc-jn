@@ -7,14 +7,14 @@ import Share from "./pages/Share.tsx";
 import Add from "./pages/Add.tsx";
 import ProtectedRoute from './components/ProtectedRoute';
 import RegisterPage from "./pages/RegisterPage.tsx";
+import AddToHomeScreen from "./components/BeforeInstallPrompt.tsx";
 
 
 function App() {
 
-
   return (
     <>
-        {/*<AddToHomeScreen />*/}
+        <AddToHomeScreen />
         <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/register" element={<RegisterPage />} />
