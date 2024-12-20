@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { supabase } from '../supabaseClient';
 import {Link, useNavigate} from 'react-router-dom';
 
-const CreateEvent = () => {
+function CreateEvent() {
+    
     
     const [title, setTitle] = useState('');
     const [date, setDate] = useState('')
     const [description, setDescription] = useState('')
-    // const [creator, setCreator] = useState('');
     const navigate = useNavigate();
     
     const createEvent = async () => {
@@ -15,7 +15,7 @@ const CreateEvent = () => {
         const { data, error } = await supabase
             .from('events')
             .insert([
-                {  title: title, date: date, description: description, qrcode: `https://api.qrserver.com/v1/create-qr-code/?data=${title}&size=150x150`,  created_by:'bcd2b9f4-2ffc-4ec8-a141-c14ac6575e72'  },
+                {  title: title, date: date, description: description, created_by:'bcd2b9f4-2ffc-4ec8-a141-c14ac6575e72'  },
             ])
             .select()
 
@@ -63,9 +63,9 @@ const CreateEvent = () => {
                                         <input className="input form" type="text" placeholder="Title" onChange={(e)=> setTitle(e.target.value)}/>
                                         <input className="input form" type="date" placeholder="Date" onChange={(e) => setDate(e.target.value)}/>
                                         <input className="input form" type="text" placeholder="Description" onChange={(e) => setDescription(e.target.value)}/>
-                                        {/*<Link to="/feed">*/}
+                                        <Link to="/feed">
                                             <button className="button" id="create" onClick={createEvent}>Create an Event</button>
-                                        {/*</Link>*/}
+                                        </Link>
 
                                     </p>
                                 </div>
