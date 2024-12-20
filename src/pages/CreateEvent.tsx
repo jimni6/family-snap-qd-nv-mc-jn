@@ -3,6 +3,24 @@ import { supabase } from '../supabaseClient';
 import {Link, useNavigate} from 'react-router-dom';
 
 function CreateEvent() {
+
+    const getUserId = async () => {
+        const { data, error } = await supabase.auth.getUser();
+
+        if (error) {
+            console.error('Error fetching user:', error.message);
+            return;
+        }
+
+        if (data?.user) {
+            const userId = data.user.id; // Get the user's unique ID
+            console.log('Authenticated User ID:', userId);
+            return userId;
+        } else {
+            console.log('No user is authenticated.');
+            return null;
+        }
+    };
     
     
     const [title, setTitle] = useState('');
@@ -15,7 +33,7 @@ function CreateEvent() {
         const { data, error } = await supabase
             .from('events')
             .insert([
-                {  title: title, date: date, description: description, created_by:'bcd2b9f4-2ffc-4ec8-a141-c14ac6575e72'  },
+                {  title: title, date: date, description: description, created_by: await getUserId()},
             ])
             .select('id')
 
