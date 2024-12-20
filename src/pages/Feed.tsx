@@ -5,8 +5,8 @@ import {supabase} from "../supabaseClient.ts";
 
 function Feed() {
 
-    const id = useParams()
-    const eventId = Object.values(id)
+    const { id } = useParams()
+    // const eventId = Object.values(id)
     
     const [title, setTitle] = useState('')
     const [date, setDate] = useState('')
@@ -19,20 +19,20 @@ function Feed() {
             const { data, error } = await supabase
                 .from('events')
                 .select('title,date, description')
-                .eq('id', eventId)
+                .eq('id', id)
 
             if(data){
                 
                 setTitle(data[0].title)
                 setDate(data[0].date)
-                setDescription(data[0].date)
+                setDescription(data[0].description)
                 
             } else (console.log(error?.message))
         }
 
         fetchEventInfo()
         
-    }, [eventId]);
+    }, [id]);
     
     return (
         <>
@@ -46,15 +46,15 @@ function Feed() {
       <h3>{description}</h3>
     </div>
     <div id="share">
-        <Link to={`/feed/${eventId}/share`}>
+        <Link to={`/feed/${id}/share`}>
             <button className="button btn-share" id="create">Share</button>
         </Link>
     </div>
-        <Photos eventId={eventId}/>
+        <Photos eventId={id}/>
     </div>
     </section>
     <footer>
-        <Link to="/add">
+        <Link to={`/feed/${id}/add`}>
             <div id="block-add">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                     <path fill="white" d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z"/>

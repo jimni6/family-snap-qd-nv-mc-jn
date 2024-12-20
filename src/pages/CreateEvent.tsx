@@ -3,6 +3,24 @@ import { supabase } from '../supabaseClient';
 import {Link, useNavigate} from 'react-router-dom';
 
 function CreateEvent() {
+
+    const getUserId = async () => {
+        const { data, error } = await supabase.auth.getUser();
+
+        if (error) {
+            console.error('Error fetching user:', error.message);
+            return;
+        }
+
+        if (data?.user) {
+            const userId = data.user.id; // Get the user's unique ID
+            console.log('Authenticated User ID:', userId);
+            return userId;
+        } else {
+            console.log('No user is authenticated.');
+            return null;
+        }
+    };
     
     
     const [title, setTitle] = useState('');
@@ -15,18 +33,20 @@ function CreateEvent() {
         const { data, error } = await supabase
             .from('events')
             .insert([
-                {  title: title, date: date, description: description, created_by:'bcd2b9f4-2ffc-4ec8-a141-c14ac6575e72'  },
+                {  title: title, date: date, description: description, created_by: await getUserId()},
             ])
-            .select()
+            .select('id')
 
         if (error) {
             alert('Insert failed');
             console.log(error.message);
-        } else {
-            console.log(data);
-                navigate('/feed')
-            }
+        } else if (data && data.length > 0) {
+            const id = data[0].id;
+
+            // Use React Router's navigate function
+            navigate(`/feed/${id}`);
         }
+    }
 
     return (
         <div>
@@ -63,9 +83,7 @@ function CreateEvent() {
                                         <input className="input form" type="text" placeholder="Title" onChange={(e)=> setTitle(e.target.value)}/>
                                         <input className="input form" type="date" placeholder="Date" onChange={(e) => setDate(e.target.value)}/>
                                         <input className="input form" type="text" placeholder="Description" onChange={(e) => setDescription(e.target.value)}/>
-                                        <Link to="/feed">
-                                            <button className="button" id="create" onClick={createEvent}>Create an Event</button>
-                                        </Link>
+                                        <button className="button" id="create" onClick={createEvent}>Create an Event</button>
 
                                     </p>
                                 </div>
