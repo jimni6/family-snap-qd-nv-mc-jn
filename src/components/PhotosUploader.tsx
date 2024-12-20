@@ -1,6 +1,8 @@
 import React, {useState, useRef} from "react";
 import Webcam from "react-webcam";
 import {supabase} from '../supabaseClient.ts';
+import {Link, useParams} from "react-router-dom";
+
 
 type UploadPhotoProps = {
     eventId: string | undefined; // UUID of the event to filter photos
@@ -92,8 +94,7 @@ const UploadPhoto: React.FC<UploadPhotoProps> = ({eventId}) => {
     return (
         <div>
             <div>
-                <button onClick={() => setUsingWebcam(false)}>Télécharger un fichier</button>
-                <button onClick={() => setUsingWebcam(true)}>Prendre une photo</button>
+                <button className="button" onClick={() => setUsingWebcam(true)}>Prendre une photo</button>
             </div>
 
             {usingWebcam ? (
@@ -103,10 +104,11 @@ const UploadPhoto: React.FC<UploadPhotoProps> = ({eventId}) => {
                         ref={webcamRef}
                         screenshotFormat="image/png"
                     />
-                    <button onClick={capturePhoto}>Capturer</button>
+                    <button className="button" onClick={capturePhoto}>Capturer</button>
                 </div>
             ) : (
-                <input type="file" accept="image/*" onChange={handleFileChange} />
+                <button className="button" onClick={() => setUsingWebcam(false)}>  <input type="file" accept="image/*" onChange={handleFileChange} /></button>
+
             )}
 
             {capturedImage && (
@@ -119,6 +121,10 @@ const UploadPhoto: React.FC<UploadPhotoProps> = ({eventId}) => {
             <button className="button" id="create" onClick={uploadPhoto} disabled={!selectedFile && !capturedImage}>
                 Upload
             </button>
+
+            <Link to={`/feed/${eventId}`}><button className="button">
+                Retour
+            </button></Link>
             {uploadStatus && <p>{uploadStatus}</p>}
         </div>
     );
