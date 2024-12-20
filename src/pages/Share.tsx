@@ -1,19 +1,17 @@
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {supabase} from "../supabaseClient.ts";
 
-// @ts-ignore
 function Share() {
 
-    const id = useParams()
-    const idEvent = Object.values(id)
+    const { id } = useParams()
     const [qrCode, setQrCode] = useState('')
     const [codeId, setCodeId] = useState('')
     
     useEffect(() => {
         const fetchQrCOde = () => {
             
-            const linkToEvent = `https://family-snap-qd-nv-mc-jn.vercel.app/feed/${idEvent}`
+            const linkToEvent = `https://family-snap-qd-nv-mc-jn.vercel.app/feed/${id}`
             const qrCode = `https://api.qrserver.com/v1/create-qr-code/?data=${linkToEvent}&size=150x150`
             setQrCode(qrCode)
         }
@@ -22,10 +20,9 @@ function Share() {
             const {data, error} = await supabase
                 .from('events')
                 .select('code_unique')
-                .eq('id', idEvent);
+                .eq('id', id);
 
             if(data) {
-                // @ts-ignore
                 setCodeId(data[0].code_unique)
                 
             } else (
@@ -35,7 +32,7 @@ function Share() {
         fetchQrCOde()
         fetchCodeUnique()
         
-    }, [idEvent]);
+    }, [id]);
     
     return (
         <>
@@ -65,7 +62,7 @@ function Share() {
         <div className="hero-body">
             
             <div className="container has-text-centered contshare">
-                <Link to="/feed">
+                <Link to={`/feed/${id}`}>
                     <div id="close">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                             <path fill="#ffffff" d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"/>
