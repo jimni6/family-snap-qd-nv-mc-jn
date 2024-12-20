@@ -5,8 +5,8 @@ import {supabase} from "../supabaseClient.ts";
 
 function Feed() {
 
-    const id = useParams()
-    const eventId = Object.values(id)
+    const { id } = useParams()
+    // const eventId = Object.values(id)
     
     const [title, setTitle] = useState('')
     const [date, setDate] = useState('')
@@ -19,7 +19,7 @@ function Feed() {
             const { data, error } = await supabase
                 .from('events')
                 .select('title,date, description')
-                .eq('id', eventId)
+                .eq('id', id)
 
             if(data){
                 
@@ -32,7 +32,7 @@ function Feed() {
 
         fetchEventInfo()
         
-    }, [eventId]);
+    }, [id]);
     
     return (
         <>
@@ -46,11 +46,11 @@ function Feed() {
       <h3>{description}</h3>
     </div>
     <div id="share">
-        <Link to={`/feed/${eventId}/share`}>
+        <Link to={`/feed/${id}/share`}>
             <button className="button btn-share" id="create">Share</button>
         </Link>
     </div>
-        <Photos eventId={eventId}/>
+        <Photos eventId={id}/>
     </div>
     </section>
     <footer>
