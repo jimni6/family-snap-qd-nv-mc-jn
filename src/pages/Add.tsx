@@ -1,5 +1,7 @@
 import {Link, useParams} from "react-router-dom";
 import UploadPhoto from "../components/PhotosUploader.tsx";
+import logo from '../assets/img/lgo.svg';
+
 
 function Add() {
     const { id } = useParams();
@@ -13,7 +15,7 @@ function Add() {
                 <div className="container">
                     <div className="navbar-brand">
                         <Link to="/" className="navbar-item" >
-                            <img src="img/lgo.svg" alt="Logo"/>
+                            <img src={logo} alt="Logo"/>
                         </Link>
                         
                     </div>

@@ -9,7 +9,6 @@ import ProtectedRoute from './components/ProtectedRoute';
 import RegisterPage from "./pages/RegisterPage.tsx";
 
 
-
 function App() {
 
 

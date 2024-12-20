@@ -1,6 +1,8 @@
 import {Link} from "react-router-dom";
 import LoginPage from "../components/LoginPage.tsx";
 import SignOutButton from "../components/SignOutButton.tsx";
+import logo from '../assets/img/lgo.svg';
+import familysvg from '../assets/img/FamilySnap.svg';
 
 function HomePage() {
     return (
@@ -11,7 +13,7 @@ function HomePage() {
                         <div className="container">
                             <div className="navbar-brand">
                                 <a className="navbar-item" href="../">
-                                    <img src="./src/assets/img/lgo.svg" alt="Logo"/>
+                                    <img src={logo} alt="Logo"/>
                                 </a>
                                 <span className="navbar-burger burger" data-target="navbarMenu">
                             <span></span>
@@ -34,7 +36,7 @@ function HomePage() {
                         <div className="columns is-vcentered">
                             <div className="column is-5">
                                 <figure className="image is-4by3">
-                                    <img src="./src/assets/img/FamilySnap.svg" alt="Description"/>
+                                    <img src={familysvg} alt="Description"/>
                                 </figure>
                             </div>
                             <div className="column is-6 is-offset-1" id="glasslp">
