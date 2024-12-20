@@ -275,3 +275,7 @@ label {
 figure img {
   object-fit: cover;
 }
+
+h1 {
+  text-transform:uppercase;
+}
