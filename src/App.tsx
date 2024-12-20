@@ -5,6 +5,9 @@ import HomePage from "./pages/HomePage.tsx";
 import Feed from "./pages/Feed.tsx";
 import Share from "./pages/Share.tsx";
 import Add from "./pages/Add.tsx";
+import ProtectedRoute from './components/ProtectedRoute';
+import RegisterPage from "./pages/RegisterPage.tsx";
+
 
 
 function App() {
@@ -15,10 +18,12 @@ function App() {
         {/*<AddToHomeScreen />*/}
         <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/create" element={<CreateEvent />} />
-            <Route path="/feed/:id" element={<Feed />} />
-            <Route path="/feed/:id/share" element={<Share />} />
-            <Route path="/feed/:id/add" element={<Add />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/create" element={<ProtectedRoute><CreateEvent /></ProtectedRoute>}/>
+            <Route path="/feed/:id" element={<ProtectedRoute><Feed /></ProtectedRoute>}/>
+            <Route path="/feed/:id/share" element={<ProtectedRoute><Share /></ProtectedRoute>}/>
+            <Route path="/feed/:id/add" element={<ProtectedRoute><Add /></ProtectedRoute>}/>
+
         </Routes>
     </>
   )
